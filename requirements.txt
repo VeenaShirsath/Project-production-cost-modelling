@@ -1,6 +1,6 @@
 A. Demand (Load Data)
 * Hourly electricity demand (MW), ideally 1 year (or start with 1 week)
-* Sources: PJM Interconnection, CAISO, ERCOT, U.S. Energy Information Administration
+* Potential sources: PJM Interconnection, CAISO, ERCOT, U.S. Energy Information Administration
 
 B. Generator Fleet Data
 Each generator should have:
