@@ -1,29 +1,3 @@
-A. Demand (Load Data)
-* Hourly electricity demand (MW), ideally 1 year (or start with 1 week)
-* Potential sources: PJM Interconnection, CAISO, ERCOT, U.S. Energy Information Administration
+Libraries:
 
-B. Generator Fleet Data
-Each generator should have:
-* Capacity (MW) -	Max output
-* Min generation - Technical minimum
-* Heat rate -	Efficiency
-* Fuel type	- Gas, coal, nuclear, wind
-* Variable cost -	$/MWh
-* Startup cost - (for UC)
-* Ramp rate -	MW/hour
-
-Source: EIA Form 860
-Tip: Start with a simplified synthetic fleet (5–10 generators), then scale up.
-
-C. Renewable Generation Profiles (Time-varying output)
-* Sources: NREL (best!), Wind & solar capacity factors (hourly)
-* What you need: Solar CF (0–1), Wind CF (0–1)
-
-D. Fuel Price
-* Used to compute generation costs.
-* Sources: U.S. Energy Information Administration
-
-E. Optional Advanced Data
-* Transmission limits (for DC OPF)
-* Emissions rates (for carbon pricing scenarios)
-
+pandas, 
