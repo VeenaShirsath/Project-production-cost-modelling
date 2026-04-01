@@ -1,7 +1,19 @@
 # Project-production-cost-modelling
 Economic Dispatch, Unit Commitment, and Renewable Integration in Python
 
-## Step 1: Building a working PCM with simple synthetic data
+## Step 1: Simple ED
+1. clipped ERCOT demand data and created a synthetic generator data
+
+## Step 2: Adding constraints, etc.
+1. Additional constraints: min gen, ramp
+2. Unit Commitment
+3. time-varying renewables
+
+## Step 3: Unit Commitment
+## Step 4: Adding larger, real-world datasets
+## Step 5: Scenario Analysis
+## Step 6: Visualizations
+
 
 ## Data Sources
 1. Demand data: [ERCOT Hourly Load Data for 2024](https://www.ercot.com/gridinfo/load/load_hist)
