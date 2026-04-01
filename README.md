@@ -1,9 +1,11 @@
 # Project-production-cost-modelling
 Economic Dispatch, Unit Commitment, and Renewable Integration in Python
 
+## Step 1: Building a working PCM with simple synthetic data
+
 ## Data Sources
-1. Demand data: [ERCOT Hourly Load Data for 2024]{https://www.ercot.com/gridinfo/load/load_hist} 
-2. Generator data: [Form EIA-860 data for 2024]{https://www.eia.gov/electricity/data/eia860/}
+1. Demand data: [ERCOT Hourly Load Data for 2024](https://www.ercot.com/gridinfo/load/load_hist)
+2. Generator data: [Form EIA-860 data for 2024](https://www.eia.gov/electricity/data/eia860/) and [Form EIA-923](https://www.eia.gov/electricity/data/eia923/)
     * LayoutYyyyy — Provides a directory of all (published) data elements collected on the Form EIA-860 together with the related description, specific file location(s), and, where appropriate, an explanation of codes.
     * 1___UtilityYyyyy — Contains utility-level data for the plants and generators surveyed in the reporting year.
     * 2___PlantYyyyy — Contains plant-level data for the generators surveyed in all available years.
@@ -27,10 +29,8 @@ Economic Dispatch, Unit Commitment, and Renewable Integration in Python
     * 4___OwnerYyyyy — Contains owner and/or operator data for generators with shared ownership and generators that are wholly-owned by an entity other than the operator (generators not appearing in the file are wholly-owned by their operator).
     * 6_1_EnviroAssocYyyyy — Contains boiler association data for the environmental equipment data collected on the Form EIA-860.
     * 6_2_EnviroEquipYyyyy — Contains environmental equipment data for the surveyed generators.
-3. Renewable Generation Profiles: Capacity factor data [NREL 2024]{https://atb.nrel.gov/electricity/2024/data}
+3. Renewable Generation Profiles: Capacity factor data [NREL 2024](https://atb.nrel.gov/electricity/2024/data)
     * For three different scenarios, there is a CF for each technology in 2024.
-    * This is not hourly data - TO BE ADDED
-4. Fuel Price: 
-    * Question: Do I need the Gasoline and Diesel Fuel Update from EIA? Need help in understanding this dataset.
+    * Alternative: [NSRDB](https://nsrdb.nlr.gov/data-viewer)
 
-
+c
