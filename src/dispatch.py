@@ -1,21 +1,8 @@
-### Economic Dispatch Logic:
-#   1. Compute marginal cost
-#   2. Sort generators from cheapest to expnsive
-#   3. Allocate generation until demand is met
-
 import pandas as pd
 
-def load_data(gen_path, demand_path):
-    generators = pd.read_csv(gen_path)
-    demand = pd.read_csv(demand_path, parse_dates=['Hour Ending'])
-    return generators, demand
+from src.renewables import compute_renewable_generation, compute_net_load
+from src.constraints import apply_ramp_constraints, enforce_min_max
 
-def compute_marginal_cost(generators):
-    generators["marginal_cost"] = (
-        generators["heat_rate_mmbtu_per_mwh"] * generators["fuel_cost_per_mmbtu"] + 
-        generators["variable_om_cost"]
-    )
-    return generators
 
 def economic_dispatch_single_hour(generators, demand_mw):
     gens = generators.sort_values("marginal_cost").copy()
@@ -28,8 +15,8 @@ def economic_dispatch_single_hour(generators, demand_mw):
             dispatch.append(0)
             continue
 
-        available = gen["capacity_mw"]
-        generation = min(available, remaining_demand)
+        requested = min(gen["capacity_mw"], remaining_demand)
+        generation = enforce_min_max(gen, requested)
 
         dispatch.append(generation)
         remaining_demand -= generation
@@ -37,19 +24,55 @@ def economic_dispatch_single_hour(generators, demand_mw):
     gens["generation_mw"] = dispatch
 
     if remaining_demand > 0:
-        print(f"Warning: Demand not fully met. Remaining: {remaining_demand} MW")
+        print(f"⚠️ Warning: Unmet demand = {remaining_demand:.2f} MW")
 
     return gens
 
-def run_dispatch(generators, demand):
+
+def run_dispatch(generators, demand, renewables):
     results = []
 
-    for _, row in demand.iterrows():
-        timestamp = row["Hour Ending"]
-        demand_mw = row["ERCOT"]
+    # track previous generation for ramping
+    prev_dispatch = {gen: 0 for gen in generators["generator_id"]}
 
-        dispatch_result = economic_dispatch_single_hour(generators, demand_mw)
-        dispatch_result["Hour Ending"] = timestamp
+    for _, row in demand.iterrows():
+        timestamp = row["timestamp"]
+        demand_mw = row["demand_mw"]
+
+        # match renewable row
+        ren_row = renewables.loc[renewables["timestamp"] == timestamp]
+
+        if ren_row.empty:
+            raise ValueError(f"No renewable data for timestamp {timestamp}")
+
+        ren_row = ren_row.iloc[0]
+
+        renewable_gen = compute_renewable_generation(generators, ren_row)
+        net_load = compute_net_load(demand_mw, renewable_gen)
+
+        thermal_gens = generators[generators["is_renewable"] == 0].copy()
+
+        dispatch_result = economic_dispatch_single_hour(thermal_gens, net_load)
+
+        # Apply ramp constraints
+        for idx, gen in dispatch_result.iterrows():
+            gen_id = gen["generator_id"]
+            prev = prev_dispatch[gen_id]
+            ramp = gen["ramp_rate_mw_per_hr"]
+            current = gen["generation_mw"]
+
+            adjusted = apply_ramp_constraints(prev, current, ramp)
+
+            dispatch_result.at[idx, "generation_mw"] = adjusted
+            prev_dispatch[gen_id] = adjusted
+
+        # Add metadata
+        dispatch_result["timestamp"] = timestamp
+        dispatch_result["demand_mw"] = demand_mw
+        dispatch_result["renewable_gen_mw"] = renewable_gen
+        dispatch_result["net_load_mw"] = net_load
+        dispatch_result["curtailment_mw"] = max(renewable_gen - demand_mw, 0)
 
         results.append(dispatch_result)
-    return pd.concat(results)
+
+    return pd.concat(results, ignore_index=True)
