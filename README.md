@@ -1,6 +1,8 @@
 # Project-production-cost-modelling
 Economic Dispatch, Unit Commitment, and Renewable Integration in Python
 
+***NOTE:*** Work in progress
+
 ## Step 1: Simple ED
 1. clipped ERCOT demand data and created a synthetic generator data
 
@@ -14,6 +16,13 @@ Economic Dispatch, Unit Commitment, and Renewable Integration in Python
 ## Step 5: Scenario Analysis
 ## Step 6: Visualizations
 
+
+## Files:
+|--- src/
+    * clean_ercot_load_data.py: clips the data to a month long series for initial stages of implementation
+    * synthetic_renewable_data.py: generates artificial renewable energy data
+    * synthetic_generator_data.py: generates artificial generation facility data
+    * 
 
 ## Data Sources
 1. Demand data: [ERCOT Hourly Load Data for 2024](https://www.ercot.com/gridinfo/load/load_hist)
@@ -45,4 +54,7 @@ Economic Dispatch, Unit Commitment, and Renewable Integration in Python
     * For three different scenarios, there is a CF for each technology in 2024.
     * Alternative: [NSRDB](https://nsrdb.nlr.gov/data-viewer)
 
-c
+
+TO DO:
+1. fix the synthetic renewable dataset
+2. run files - make sure they run properly without errors, visualize the results.
