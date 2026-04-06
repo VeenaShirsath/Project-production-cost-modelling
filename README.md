@@ -3,18 +3,14 @@ Economic Dispatch, Unit Commitment, and Renewable Integration in Python
 
 ***NOTE:*** Work in progress
 
-## Step 1: Simple ED
-1. clipped ERCOT demand data and created a synthetic generator data
+1. Step 1: Simple ED
+2. Step 2: Adding constraints, etc. *-- NOTE:* there is unmet demand !!
 
-## Step 2: Adding constraints, etc.
-1. Additional constraints: min gen, ramp
-2. Unit Commitment
-3. time-varying renewables
-
-## Step 3: Unit Commitment
-## Step 4: Adding larger, real-world datasets
-## Step 5: Scenario Analysis
-## Step 6: Visualizations
+3. Step 3: Unit Commitment --- here
+    * improve pyomo for UC, make it realistic.
+4. Step 4: Adding larger, real-world datasets
+5. Step 5: Scenario Analysis
+6. Step 6: Visualizations
 
 
 ## Files:
@@ -53,8 +49,3 @@ Economic Dispatch, Unit Commitment, and Renewable Integration in Python
 3. Renewable Generation Profiles: Capacity factor data [NREL 2024](https://atb.nrel.gov/electricity/2024/data)
     * For three different scenarios, there is a CF for each technology in 2024.
     * Alternative: [NSRDB](https://nsrdb.nlr.gov/data-viewer)
-
-
-TO DO:
-1. fix the synthetic renewable dataset
-2. run files - make sure they run properly without errors, visualize the results.
