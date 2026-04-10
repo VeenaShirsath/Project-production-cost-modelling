@@ -1,51 +1,115 @@
-# Project-production-cost-modelling
-Economic Dispatch, Unit Commitment, and Renewable Integration in Python
+# Production Cost Modeling in Power Systems
 
-***NOTE:*** Work in progress
+[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
+[![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-orange.svg)](https://jupyter.org/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-1. Step 1: Simple ED
-2. Step 2: Adding constraints, etc. *-- NOTE:* there is unmet demand !!
+A comprehensive Python-based framework for production cost modeling in power systems, featuring economic dispatch, unit commitment, and renewable energy integration optimization.
 
-3. Step 3: Unit Commitment --- here
-    * improve pyomo for UC, make it realistic.
-4. Step 4: Adding larger, real-world datasets
-5. Step 5: Scenario Analysis
-6. Step 6: Visualizations
+## Overview
 
+This project implements advanced power system optimization techniques to model electricity production costs, incorporating both conventional thermal generation and renewable energy sources. Designed for power systems engineers and researchers, it provides tools for analyzing dispatch strategies, evaluating renewable integration impacts, and conducting scenario-based analyses.
 
-## Files:
-|--- src/
-    * clean_ercot_load_data.py: clips the data to a month long series for initial stages of implementation
-    * synthetic_renewable_data.py: generates artificial renewable energy data
-    * synthetic_generator_data.py: generates artificial generation facility data
-    * 
+## Key Features
+
+- **Economic Dispatch**: Optimal allocation of generation resources to meet demand at minimum cost
+- **Unit Commitment**: Strategic scheduling of power plants considering startup/shutdown costs and constraints
+- **Renewable Integration**: Incorporation of wind and solar capacity factors with realistic generation profiles
+- **Constraint Modeling**: Ramp rates, minimum/maximum generation limits, and operational constraints
+- **Scenario Analysis**: Comparative evaluation of different operational strategies and market conditions
+- **Data-Driven Approach**: Integration with real ERCOT and EIA datasets for authentic modeling
+
+## Current Development Status
+
+- ✅ **Phase 1**: Basic Economic Dispatch implementation
+- ✅ **Phase 2**: Advanced constraints and optimization 
+- 🔄 **Phase 3**: Unit Commitment with Pyomo optimization (in progress)
+- ⏳ **Phase 4**: Large-scale real-world dataset integration
+- ⏳ **Phase 5**: Comprehensive scenario analysis
+- ⏳ **Phase 6**: Interactive visualizations and reporting
+
+## 🛠 Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/VeenaShirsath/Project-production-cost-modelling.git
+cd Project-production-cost-modelling
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Optional: Create virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+## 🚀 Usage
+
+### Basic Economic Dispatch
+```python
+python main.py
+```
+
+### Jupyter Notebook Analysis
+```bash
+jupyter notebook notebooks/
+```
+
+### Data Processing
+```python
+# Clean ERCOT load data
+python src/clean_ercot_load_data.py
+
+# Generate synthetic renewable data
+python src/synthetic_renewable_data.py
+```
+
+## Project Structure
+
+```
+├── config.yaml                 # Configuration settings
+├── main.py                     # Main execution script
+├── requirements.txt            # Python dependencies
+├── data/                       # Input data directory
+│   ├── demand/                 # Load/demand data
+│   ├── generators/             # Generation facility data
+│   └── renewables/             # Renewable energy profiles
+├── src/                        # Source code
+│   ├── dispatch.py             # Economic dispatch algorithms
+│   ├── unit_commitment.py      # Unit commitment models
+│   ├── cost_functions.py       # Cost calculation utilities
+│   ├── constraints.py          # Operational constraints
+│   ├── renewables.py           # Renewable energy modeling
+│   ├── scenarios.py            # Scenario analysis tools
+│   └── utils.py                # Helper functions
+├── notebooks/                  # Jupyter notebooks for analysis
+│   ├── 01_baseline_dispatch.ipynb
+│   ├── 02_unit_commitment.ipynb
+│   └── 03_scenario_analysis.ipynb
+└── results/                    # Output results and reports
+```
 
 ## Data Sources
-1. Demand data: [ERCOT Hourly Load Data for 2024](https://www.ercot.com/gridinfo/load/load_hist)
-2. Generator data: [Form EIA-860 data for 2024](https://www.eia.gov/electricity/data/eia860/) and [Form EIA-923](https://www.eia.gov/electricity/data/eia923/)
-    * LayoutYyyyy — Provides a directory of all (published) data elements collected on the Form EIA-860 together with the related description, specific file location(s), and, where appropriate, an explanation of codes.
-    * 1___UtilityYyyyy — Contains utility-level data for the plants and generators surveyed in the reporting year.
-    * 2___PlantYyyyy — Contains plant-level data for the generators surveyed in all available years.
-    * 3_1_GeneratorYyyyy — Contains generator-level data for the surveyed generators, split into three tabs.
-        * The Operable tab includes those generators which are currently operating, out of service or on standby;
-        * The Proposed tab includes those generators which are planned and not yet in operation; and
-        * The Retired and Canceled tab includes those generators which were cancelled prior to completion and operation and retired generators at existing plants.
-    * 3_2_WindYyyyy — Contains additional details for surveyed generators that use wind as an energy source, split into two tabs:
-        * The Operable tab includes those generators which are currently operating, out of service or on standby; and
-        * The Retired and Canceled tab includes those generators which were cancelled prior to completion and operation and retired generators at existing plants.
-    * 3_3_SolarYyyyy — Contains additional details for surveyed generators that use solar as an energy source, split into two tabs:
-        * The Operable tab includes those generators which are currently operating, out of service or on standby;
-        * The Retired and Canceled tab includes those generators which were cancelled prior to completion and operation and retired generators at existing plants.
-    * 3_4_Energy_StorageYyyyy — Contains additional details of surveyed generators for the energy storage technology, split into two tabs:
-        * The Operable tab includes those generators which are currently operating, out of service or on standby;
-        * The Retired and Canceled tab includes those generators which were cancelled prior to completion and operation and retired generators at existing plants.
-    * 3_5_MultiFuelYyyyy — Contains data on fuel-switching and the use of multiple fuels by surveyed generators, split into three tabs:
-        * The Operable tab includes those generators which are currently operating, out of service or on standby; and
-        * The Proposed tab includes those generators which are planned and not yet in operation; and
-        * The Retired and Canceled tab includes those generators which were cancelled prior to completion and operation and retired generators at existing plants.
-    * 4___OwnerYyyyy — Contains owner and/or operator data for generators with shared ownership and generators that are wholly-owned by an entity other than the operator (generators not appearing in the file are wholly-owned by their operator).
-    * 6_1_EnviroAssocYyyyy — Contains boiler association data for the environmental equipment data collected on the Form EIA-860.
-    * 6_2_EnviroEquipYyyyy — Contains environmental equipment data for the surveyed generators.
-3. Renewable Generation Profiles: Capacity factor data [NREL 2024](https://atb.nrel.gov/electricity/2024/data)
-    * For three different scenarios, there is a CF for each technology in 2024.
-    * Alternative: [NSRDB](https://nsrdb.nlr.gov/data-viewer)
+
+### Demand Data
+- **ERCOT Hourly Load Data**: Real-time and historical load profiles from the Electric Reliability Council of Texas
+- Source: [ERCOT Load History](https://www.ercot.com/gridinfo/load/load_hist)
+
+### Generator Data
+- **EIA Form 860**: Detailed generator characteristics including capacity, fuel type, and operational parameters
+- **EIA Form 923**: Monthly generation and fuel consumption data
+- Source: [U.S. Energy Information Administration](https://www.eia.gov/electricity/data/)
+
+### Renewable Profiles
+- **NREL Annual Technology Baseline (ATB)**: Capacity factor data for wind and solar technologies
+- Alternative: **NSRDB** (National Solar Radiation Database) for site-specific solar irradiance
+- Source: [NREL ATB](https://atb.nrel.gov/electricity/2024/data)
+
+## Technologies
+
+- **Python 3.8+**: Core programming language
+- **Pandas & NumPy**: Data manipulation and numerical computing
+- **Pyomo**: Mathematical optimization modeling
+- **Jupyter**: Interactive analysis and visualization
+- **Matplotlib/Seaborn**: Data visualization
