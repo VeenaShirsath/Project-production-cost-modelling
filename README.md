@@ -28,7 +28,7 @@ This project implements advanced power system optimization techniques to model e
 - ⏳ **Phase 5**: Comprehensive scenario analysis
 - ⏳ **Phase 6**: Interactive visualizations and reporting
 
-## 🛠 Installation
+## Installation
 
 ```bash
 # Clone the repository
@@ -44,11 +44,11 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-## 🚀 Usage
+## Usage
 
 ### Basic Economic Dispatch
 ```python
-python main.py
+python main_ED.py
 ```
 
 ### Jupyter Notebook Analysis
