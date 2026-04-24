@@ -11,12 +11,13 @@ data = {
   "startup_cost": [50000, 20000, 15000, 10000, 8000, 2000, 1500, 0, 0],
   "ramp_rate_mw_per_hr": [50, 100, 80, 200, 180, 300, 300, 1000, 1000],
   "is_renewable": [0, 0, 0, 0, 0, 0, 0, 1, 1],
+  "min_up_time":    [24, 12, 10, 6, 5, 1, 1, 0, 0], # in hours
+  "min_down_time":  [24, 10, 8, 4, 4, 1, 1, 0, 0],
 }
 
-#load data into a DataFrame object:
 df = pd.DataFrame(data)
+
 print("Generated df shape:", df.shape)
 
-#save the DataFrame to a CSV file:
 df.to_csv("data/generators/synthetic_generator_data.csv", index=False)
 print("File saved successfully")
