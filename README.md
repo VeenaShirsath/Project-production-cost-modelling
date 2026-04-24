@@ -2,7 +2,6 @@
 
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
 [![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-orange.svg)](https://jupyter.org/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 A comprehensive Python-based framework for production cost modeling in power systems, featuring economic dispatch, unit commitment, and renewable energy integration optimization.
 
@@ -23,8 +22,8 @@ This project implements advanced power system optimization techniques to model e
 
 - ✅ **Phase 1**: Basic Economic Dispatch implementation
 - ✅ **Phase 2**: Advanced constraints and optimization 
-- 🔄 **Phase 3**: Unit Commitment with Pyomo optimization (in progress)
-- ⏳ **Phase 4**: Large-scale real-world dataset integration
+- ✅ **Phase 3**: Unit Commitment with Pyomo optimization (in progress)
+- 🔄 **Phase 4**: Large-scale real-world dataset integration
 - ⏳ **Phase 5**: Comprehensive scenario analysis
 - ⏳ **Phase 6**: Interactive visualizations and reporting
 
@@ -63,13 +62,20 @@ python src/clean_ercot_load_data.py
 
 # Generate synthetic renewable data
 python src/synthetic_renewable_data.py
+
+# Generate synthetic generator data
+python src/synthetic_generator_data.py
 ```
 
 ## Project Structure
 
 ```
 ├── config.yaml                 # Configuration settings
-├── main.py                     # Main execution script
+├── model_specifications.md     # Description of the ED and UC models
+├── observations-notes.md       # Working notes
+├── config.yaml                 # Configuration settings
+├── main_ED.py                  # Main Economic Dispatch execution script
+├── main_UC.py                  # Main Unit Commitment execution script
 ├── requirements.txt            # Python dependencies
 ├── data/                       # Input data directory
 │   ├── demand/                 # Load/demand data
