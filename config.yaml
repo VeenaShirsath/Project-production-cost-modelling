@@ -1,0 +1,7 @@
+results_path: results/dispatch_runs_ercot-fleet
+plots_path: results/plots_ercot-fleet
+
+runs:
+  economic_dispatch: dispatch_20260427_150856.csv
+  unit_commitment: 
+  - dispatch_20260427_161211.csv
