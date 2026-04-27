@@ -49,6 +49,8 @@ def run_dispatch(generators, demand, renewables, reserve_margin=0.05):
         thermal_gens = generators[generators["is_renewable"] == 0].copy()
         dispatch_result = economic_dispatch_single_hour(thermal_gens, net_load)
 
+        dispatch_result["generation_mw"] = dispatch_result["generation_mw"].astype(float)
+        
         # Apply ramp constraints and update previous generation
         for idx, gen in dispatch_result.iterrows():
             gen_id = gen["generator_id"]

@@ -6,7 +6,7 @@ from pathlib import Path
 def save_results(dispatch_df):
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
-    output_dir = Path("results/dispatch_runs")
+    output_dir = Path("results/dispatch_runs_ercot-fleet")
     output_dir.mkdir(parents=True, exist_ok=True)
 
     file_path = output_dir / f"dispatch_{timestamp}.csv"

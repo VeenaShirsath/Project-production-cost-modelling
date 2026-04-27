@@ -88,7 +88,7 @@ def run_unit_commitment(generators_df, demand_df, renewables_df):
         ren_row = renewables_df.loc[renewables_df["timestamp"] == t]
         renewable_gen = compute_renewable_generation(generators_df, ren_row.iloc[0]) if not ren_row.empty else 0
         net_load = max(demand_data[t] - renewable_gen, 0)
-        return sum(m.P[g, t] for g in m.G) + m.LS[t] == net_load
+        return sum(m.P[g, t] for g in m.G) + m.LS[t] >= net_load
 
     model.PowerBalance = Constraint(model.T, rule=power_balance_rule)
 
