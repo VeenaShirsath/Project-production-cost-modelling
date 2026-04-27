@@ -33,14 +33,6 @@ This project implements advanced power system optimization techniques to model e
 # Clone the repository
 git clone https://github.com/VeenaShirsath/Project-production-cost-modelling.git
 cd Project-production-cost-modelling
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Optional: Create virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-pip install -r requirements.txt
 ```
 
 ## Usage
@@ -48,11 +40,6 @@ pip install -r requirements.txt
 ### Basic Economic Dispatch
 ```python
 python main_ED.py
-```
-
-### Jupyter Notebook Analysis
-```bash
-jupyter notebook notebooks/
 ```
 
 ### Data Processing
