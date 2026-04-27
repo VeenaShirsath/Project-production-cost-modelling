@@ -6,8 +6,8 @@ from src.renewables import load_renewables
 import pandas as pd
 
 def main():
-    generators = pd.read_csv("data/generators/synthetic_generator_data.csv")
-    demand = pd.read_csv("data/demand/load_1month_clean.csv")
+    generators = pd.read_csv("data/generators/synthetic_ercot_fleet.csv")
+    demand = pd.read_csv("data/demand/load_2week_clean.csv")
     renewables = load_renewables("data/renewables/synthetic_renewables.csv")
     
     # Convert timestamps to datetime for proper alignment

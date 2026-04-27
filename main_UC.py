@@ -3,8 +3,8 @@ import pandas as pd
 from src.utils import save_results
 
 # Load data
-generators = pd.read_csv("data/generators/synthetic_generator_data.csv")
-demand = pd.read_csv("data/demand/load_1month_clean.csv", parse_dates=["timestamp"])
+generators = pd.read_csv("data/generators/synthetic_ercot_fleet.csv")
+demand = pd.read_csv("data/demand/load_2week_clean.csv", parse_dates=["timestamp"])
 renewables = pd.read_csv("data/renewables/synthetic_renewables.csv", parse_dates=["timestamp"])
 
 # Run Unit Commitment
